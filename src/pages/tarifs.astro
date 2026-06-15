@@ -1,0 +1,177 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import config from '../data/config.json';
+import communes from '../data/communes.json';
+
+const topCommunes = [...communes].sort((a, b) => b.population - a.population).slice(0, 12);
+
+const title = `Tarifs Pose Borne de Recharge Isère (38) - Prix 2026`;
+const description = `Découvrez notre grille de tarifs détaillés pour l'installation d'une borne de recharge ou d'une prise Green'Up en Isère (38) en 2026.`;
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Tarifs Installation 2026" }
+];
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup 
+    slot="head" 
+    pageUrl={Astro.url.href}
+    pageTitle={title}
+    pageDescription={description}
+    breadcrumbItems={breadcrumbItems}
+  />
+
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section class="static-page-section" style="padding: 50px 0 80px; background-color: var(--bg);">
+    <div class="container">
+      <div class="two-column-layout">
+        
+        <!-- Main Content -->
+        <div class="static-main-content rich-text" style="background: var(--card-bg); padding: 40px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+          <h1 style="font-family: var(--font-heading); font-size: 32px; font-weight: 700; color: var(--primary); margin-bottom: 20px;">Grille Tarifaire Installation Borne de Recharge en 2026</h1>
+          
+          <p>
+            Quel est le coût réel pour équiper son domicile ou son chalet d'une borne de recharge électrique IRVE dans le département de l'Isère (38) ? Le budget total dépend principalement du type d'équipement choisi (prise renforcée, borne monophasée 7.4 kW ou triphasée 22 kW), de la longueur de câblage nécessaire pour relier la borne au tableau de répartition principal, et des contraintes d'intégration (murs en pierre dauphinoise, chalets à percer, allées rocheuses).
+          </p>
+
+          <h2>1. Prix Moyens Observés pour les Équipements de Recharge (Matériel + Pose)</h2>
+          <p>
+            Les tarifs ci-dessous indiquent les moyennes départementales pratiquées par notre réseau d'artisans électriciens qualifiés IRVE en Isère, TVA de 5,5% incluse (pour les logements achevés depuis plus de 2 ans) :
+          </p>
+          
+          <div class="table-scroll-wrapper" style="overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%;">
+            <table class="data-table" style="min-width: 500px; width: 100%; border-collapse: collapse; margin: 25px 0;">
+              <thead>
+                <tr>
+                  <th style="padding: 12px; border-bottom: 2px solid var(--border-color); text-align: left;">Type de Solution</th>
+                  <th style="padding: 12px; border-bottom: 2px solid var(--border-color); text-align: left;">Puissance &amp; Vitesse</th>
+                  <th style="padding: 12px; border-bottom: 2px solid var(--border-color); text-align: left;">Matériel &amp; Pose Standard</th>
+                  <th style="padding: 12px; border-bottom: 2px solid var(--border-color); text-align: left;">Reste à charge (Aides Déduites)*</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Prise renforcée Green'Up</strong></td>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">3.7 kW (16A Monophasé)</td>
+                  <td class="price" style="padding: 12px; border-bottom: 1px solid var(--border-color); font-weight: bold; color: var(--accent);">400 € - 700 €</td>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color); font-weight: bold; color: var(--secondary);">400 € - 700 €</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Wallbox 7 kW Monophasé</strong></td>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">7.4 kW (32A Monophasé)</td>
+                  <td class="price" style="padding: 12px; border-bottom: 1px solid var(--border-color); font-weight: bold; color: var(--accent);">1 200 € - 1 800 €</td>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color); font-weight: bold; color: var(--secondary);">700 € - 1 300 €</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Wallbox 11 kW Triphasé</strong></td>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">11 kW (Triphasé)</td>
+                  <td class="price" style="padding: 12px; border-bottom: 1px solid var(--border-color); font-weight: bold; color: var(--accent);">1 500 € - 2 300 €</td>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color); font-weight: bold; color: var(--secondary);">1 000 € - 1 800 €</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Wallbox 22 kW Triphasé</strong></td>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">22 kW (Triphasé)</td>
+                  <td class="price" style="padding: 12px; border-bottom: 1px solid var(--border-color); font-weight: bold; color: var(--accent);">2 100 € - 3 600 €</td>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color); font-weight: bold; color: var(--secondary);">1 600 € - 3 100 €</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>Borne copropriété (par place)</strong></td>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Parking collectif / habitat social</td>
+                  <td class="price" style="padding: 12px; border-bottom: 1px solid var(--border-color); font-weight: bold; color: var(--accent);">2 600 € - 4 800 €</td>
+                  <td style="padding: 12px; border-bottom: 1px solid var(--border-color); font-weight: bold; color: var(--secondary);">1 640 € - 3 840 €</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-muted);">
+            * Note : Le reste à charge minimal est calculé pour une maison individuelle après déduction du crédit d'impôt national de 500 €. En copropriété, s'ajoute la prime ADVENIR individuelle de 960 € TTC, réduisant le reste à charge réel.
+          </p>
+
+          <h2>2. Prix des Prestations Complémentaires et Travaux Induits</h2>
+          <p>
+            Chaque configuration de logement comporte ses propres contraintes. Voici la tarification moyenne des prestations optionnelles fréquentes lors des chantiers d'installation :
+          </p>
+          <ul style="margin-left: 20px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>Longueur de câblage supplémentaire (au-delà du forfait initial de 10m) :</strong> Compter entre 20 € et 40 € par mètre supplémentaire en câble R2V 3G10 (goulotte comprise).</li>
+            <li><strong>Délestage dynamique intelligent (Smart Charging) :</strong> Forfait de 150 € à 300 € pour la fourniture et la pose d'un module de communication avec votre compteur Linky (type TIC ou tore de mesure).</li>
+            <li><strong>Travaux de terrassement / Génie Civil :</strong> Réalisation d'une tranchée dans la terre, pose du fourreau et remblayage pour un tarif moyen de 50 € à 100 € par mètre linéaire.</li>
+            <li><strong>Pied de support métallique :</strong> Pour fixation de la borne en allée ou extérieure (sans mur porteur direct) : 200 € à 350 € TTC (pose scellée).</li>
+          </ul>
+
+          <h2>3. Impact Budgétaire du Passage de Monophasé à Triphasé</h2>
+          <p>
+            Si vous souhaitez recharger votre voiture électrique à 11 kW ou 22 kW pour récupérer votre pleine autonomie en moins de 3 heures (conseillé pour les véhicules à grande batterie et les trajets réguliers en altitude), votre installation domestique doit être alimentée en courant triphasé. Si votre logement à Grenoble, Voiron ou Vienne est actuellement en monophasé :
+          </p>
+          <ul style="margin-left: 20px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 8px;">
+            <li>Vous devez demander à Enedis le changement de raccordement réseau (prestation généralement facturée environ 500 € à 1 300 € par le gestionnaire selon la configuration).</li>
+            <li>Votre électricien IRVE restructurera le tableau électrique principal pour équilibrer les trois phases et changer les protections pour des modules tétrapolaires (surcoût moyen sur le tableau de 300 € à 600 €).</li>
+          </ul>
+
+          <h2>4. Conseils d'expert pour optimiser le coût de votre borne</h2>
+          <p>
+            Pour payer votre installation au prix le plus juste :
+          </p>
+          <ol style="margin-left: 20px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>Installez la borne à proximité du tableau :</strong> Plus la borne est proche de votre compteur, moins le coût du câble en cuivre de grosse section (10mm²) et des goulottes sera élevé.</li>
+            <li><strong>Optez pour le délestage dynamique :</strong> Plutôt que d'augmenter la puissance de votre abonnement d'électricité, installez un module de délestage qui régule la borne en temps réel.</li>
+            <li><strong>Demandez des devis comparatifs :</strong> En comparant 3 professionnels IRVE locaux en Isère, vous bénéficiez du meilleur tarif de main-d'œuvre et évitez les surcoûts.</li>
+          </ol>
+
+          <div style="background: var(--primary-light); border: 1.5px solid var(--border-color); padding: 25px; border-radius: var(--radius-md); margin-top: 40px;">
+            <h3 style="margin-top: 0; color: var(--primary); font-size: 17px; font-weight: 600; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-bottom: 15px;">🔗 Liens utiles & Articles recommandés</h3>
+            <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 12px; font-size: 14px; margin-bottom: 0;">
+              <li>💰 <a href="/aides-advenir/" style="color: var(--secondary); font-weight: 600;">Détail complet des aides et primes ADVENIR 2026</a></li>
+              <li>🛠️ <a href="/guide-installation/" style="color: var(--secondary); font-weight: 600;">Guide technique de câblage et normes NF C 15-100</a></li>
+              <li>🏢 <a href="/guides/copropriete-grenoble-irve-collective-syndic/" style="color: var(--secondary); font-weight: 600;">Frais et démarches pour borne en copropriété</a></li>
+            </ul>
+          </div>
+
+          <!-- Mini-annuaire communes — maillage interne -->
+          <div style="border-top: 1px solid var(--border-color); padding-top: 35px; margin-top: 40px;">
+            <h2 style="font-size: 20px; color: var(--primary); margin-bottom: 5px;">📍 Tarifs par commune en Isère</h2>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Obtenez un devis personnalisé pour votre ville avec les prix actualisés 2026 :</p>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+              {topCommunes.map((c) => (
+                <a href={`/installateur-borne-recharge-${c.slug}/`} style="font-size: 12.5px; color: var(--secondary); font-weight: 600; background: var(--primary-light); padding: 8px 12px; border-radius: 4px; border: 1px solid var(--border-color); text-decoration: none; text-align: center; transition: var(--transition);">
+                  {c.nom}
+                </a>
+              ))}
+            </div>
+            <p style="text-align: center; margin-top: 12px;">
+              <a href="/communes/" style="font-size: 13px; color: var(--accent); font-weight: 600;">Voir les 155 communes →</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="static-sidebar">
+          <div class="sidebar-widget bg-purple-gradient">
+            <h3>🧮 Simuler mon devis</h3>
+            <p>Remplissez notre formulaire en 2 minutes pour recevoir 3 offres comparatives personnalisées d'électriciens IRVE en Isère.</p>
+            <a href="/devis/" class="sidebar-cta-gold">Faire ma simulation en ligne →</a>
+          </div>
+
+          <div class="sidebar-widget">
+            <h3>🏢 Gain Économique</h3>
+            <p style="font-size: 13px;">Avec un coût moyen de recharge à domicile de **2.50 € les 100 km** (tarif de nuit Enedis) contre environ **15.60 €** en essence, votre installation de Wallbox est amortie en moins de 18 mois.</p>
+            <a href="/guides/prix-borne-recharge-isere-2026/" style="color: var(--secondary); font-weight: 600; font-size: 13px;">Analyse des prix locaux →</a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @media (max-width: 992px) {
+    .two-column-layout {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

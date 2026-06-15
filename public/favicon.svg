@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#1E40AF"/>
+  <!-- Mountain silhouette -->
+  <polygon points="10,95 35,50 50,65 64,35 78,65 93,50 118,95" fill="#2563EB" opacity="0.6"/>
+  <!-- EV Charging bolt -->
+  <path d="M72 25 L55 60 L65 60 L56 103 L73 68 L63 68 Z" fill="#FBBF24" stroke="#F59E0B" stroke-width="1.5"/>
+  <!-- Charging station outline -->
+  <rect x="42" y="55" width="10" height="28" rx="2" fill="white" opacity="0.5"/>
+  <rect x="76" y="55" width="10" height="28" rx="2" fill="white" opacity="0.5"/>
+</svg>

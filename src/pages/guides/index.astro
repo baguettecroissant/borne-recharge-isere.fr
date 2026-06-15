@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import SchemaMarkup from '../../components/SchemaMarkup.astro';
+import config from '../../data/config.json';
+import communes from '../../data/communes.json';
+import { getCollection } from 'astro:content';
+
+const title = `Guides & Conseils Pratiques Borne de Recharge | ${config.brandName}`;
+const description = `Retrouvez les conseils d'électriciens IRVE pour installer votre borne de recharge (Wallbox) en Isère (38) : tarifs, aides ADVENIR, copropriété et altitude.`;
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Guides & Conseils" }
+];
+
+// Fetch all content collection guides
+const allGuides = await getCollection('guides');
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup
+    slot="head"
+    pageUrl={Astro.url.href}
+    pageTitle={title}
+    pageDescription={description}
+    breadcrumbItems={breadcrumbItems}
+  />
+
+  <Breadcrumb items={breadcrumbItems} />
+
+  <!-- Hero Banner -->
+  <section class="guides-hero" style="background: linear-gradient(135deg, #0b1329 0%, #1e3a8a 100%); color: white; padding: 60px 0; text-align: center; border-bottom: 5px solid var(--accent);">
+    <div class="container" style="max-width: 900px; margin: 0 auto;">
+      <span class="hero-badge" style="background: rgba(239, 68, 68, 0.2); border-color: var(--accent);">📚 E-E-A-T Électricien Conseils Isère</span>
+      <h1 style="color: white; font-family: var(--font-heading); font-size: 38px; margin-top: 10px; margin-bottom: 15px;">
+        Guides &amp; Conseils Borne de Recharge (38)
+      </h1>
+      <p style="color: var(--primary-light); font-size: 16px; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+        Découvrez nos guides d’experts pour planifier l’installation de votre wallbox à domicile ou en copropriété, estimer vos aides nationales et locales, et faire face aux contraintes du froid et de l'altitude en Isère.
+      </p>
+    </div>
+  </section>
+
+  <!-- Guides Grid Section -->
+  <section style="padding: 60px 0; background-color: var(--bg);">
+    <div class="container">
+      <div class="guides-grid-detail" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+        {allGuides.map((guide) => (
+          <article style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; transition: var(--transition);">
+            <div style="aspect-ratio: 16/10; overflow: hidden; background: var(--primary-light); border-bottom: 1px solid var(--border-color);">
+              {guide.data.image && (
+                <img 
+                  src={guide.data.image} 
+                  alt={guide.data.title} 
+                  style="width: 100%; height: 100%; object-fit: cover; transition: var(--transition);" 
+                  class="guide-card-img"
+                />
+              )}
+            </div>
+            <div style="padding: 24px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1;">
+              {guide.data.category && (
+                <span style="font-size: 11px; background: var(--primary-light); color: var(--primary); padding: 4px 10px; border-radius: 50px; font-weight: bold; width: fit-content; text-transform: uppercase; letter-spacing: 0.5px;">
+                  {guide.data.category}
+                </span>
+              )}
+              <h2 style="font-size: 18px; line-height: 1.35; margin: 0;">
+                <a href={`/guides/${guide.id}/`} style="color: var(--primary); font-weight: 700; text-decoration: none;">
+                  {guide.data.title}
+                </a>
+              </h2>
+              <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5; margin: 0; flex-grow: 1;">
+                {guide.data.description}
+              </p>
+              <div style="border-top: 1.5px solid var(--primary-light); padding-top: 15px; margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 12px; color: var(--text-muted);">Publié le {new Date(guide.data.pubDate || '').toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                <a href={`/guides/${guide.id}/`} style="font-size: 13px; font-weight: bold; color: var(--accent);">Lire l'article &rarr;</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Funnel CTA Callout -->
+  <section style="padding: 50px 0; background-color: var(--primary-light); border-top: 1px solid var(--border-color); text-align: center;">
+    <div class="container" style="max-width: 700px;">
+      <h2 style="font-family: var(--font-heading); font-size: 28px; color: var(--primary); margin-bottom: 12px;">Prêt à installer votre borne ?</h2>
+      <p style="color: var(--text-muted); font-size: 15.5px; line-height: 1.5; margin-bottom: 25px;">
+        Estimez le montant de vos aides en 2 minutes et comparez les devis gratuits de 3 artisans qualifiés IRVE de l'Isère.
+      </p>
+      <a href="/devis/" class="contact-btn" style="padding: 14px 35px; font-size: 16px;">📋 Lancer le test d'éligibilité gratuit &rarr;</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @media (max-width: 992px) {
+    .guides-grid-detail {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 20px;
+    }
+  }
+  @media (max-width: 768px) {
+    .guides-grid-detail {
+      grid-template-columns: 1fr !important;
+    }
+  }
+  article:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md) !important;
+    border-color: var(--accent) !important;
+  }
+  article:hover .guide-card-img {
+    transform: scale(1.03);
+  }
+</style>

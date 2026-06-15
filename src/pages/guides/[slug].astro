@@ -1,0 +1,178 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import SchemaMarkup from '../../components/SchemaMarkup.astro';
+import StepsForm from '../../components/StepsForm.astro';
+import config from '../../data/config.json';
+import communes from '../../data/communes.json';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allGuides = await getCollection('guides');
+  return allGuides.map((guide) => ({
+    params: { slug: guide.id },
+    props: { guide }
+  }));
+}
+
+interface Props {
+  guide: CollectionEntry<'guides'>;
+}
+
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+
+const title = `${guide.data.title} | ${config.brandName}`;
+const description = guide.data.description;
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Guides & Conseils", href: "/guides/" },
+  { label: guide.data.title }
+];
+
+// Top 6 communes for inline link suggestions
+const popularCommunes = communes.slice(0, 6);
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup
+    slot="head"
+    pageUrl={Astro.url.href}
+    pageTitle={title}
+    pageDescription={description}
+    breadcrumbItems={breadcrumbItems}
+  />
+
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section class="static-page-section" style="padding: 50px 0 80px; background-color: var(--bg);">
+    <div class="container">
+      <div class="two-column-layout">
+        
+        <!-- Left Column: Content -->
+        <article class="static-main-content rich-text" style="background: var(--card-bg); padding: 40px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+          {guide.data.category && (
+            <span style="font-size: 11px; background: var(--primary-light); color: var(--primary); padding: 4px 10px; border-radius: 50px; font-weight: bold; width: fit-content; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 12px;">
+              {guide.data.category}
+            </span>
+          )}
+          <h1 style="font-family: var(--font-heading); font-size: 32px; font-weight: 700; color: var(--primary); line-height: 1.25; margin-bottom: 20px;">{guide.data.title}</h1>
+          
+          <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 25px; border-bottom: 1px solid var(--primary-light); padding-bottom: 15px;">
+            Publié par <strong>Équipe éditoriale IRVE</strong> · Mis à jour en Juin 2026 · Temps de lecture : ~4 minutes
+          </div>
+
+          {guide.data.image && (
+            <div style="margin-bottom: 30px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+              <img src={guide.data.image} alt={guide.data.title} style="width: 100%; height: auto; max-height: 420px; object-fit: cover; display: block;" />
+            </div>
+          )}
+
+          <!-- Markdown Content Output -->
+          <div class="markdown-body-render">
+            <Content />
+          </div>
+
+          <!-- Inline City Mini-directory for local SEO linking -->
+          <div style="background: var(--primary-light); border: 1.5px solid var(--border-color); padding: 25px; border-radius: var(--radius-md); margin-top: 45px;">
+            <h3 style="margin-top: 0; color: var(--primary); font-size: 17px; font-weight: bold; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-bottom: 15px;">📍 Installer une borne de recharge dans votre commune (38)</h3>
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 15px;">Comparez 3 devis gratuits et accédez aux subventions locales en choisissant votre commune :</p>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+              {popularCommunes.map((c) => (
+                <a href={`/installateur-borne-recharge-${c.slug}/`} style="font-size: 12.5px; color: var(--secondary); font-weight: 700; background: white; padding: 8px 12px; border-radius: 4px; border: 1px solid var(--border-color); text-decoration: none; text-align: center; transition: var(--transition);">
+                  {c.nom}
+                </a>
+              ))}
+            </div>
+            <p style="text-align: center; margin-top: 15px; margin-bottom: 0;">
+              <a href="/communes/" style="font-size: 13.5px; color: var(--accent); font-weight: 700;">Voir les {communes.length} communes de l'Isère &rarr;</a>
+            </p>
+          </div>
+        </article>
+
+        <!-- Right Column: Sidebar Sticky Form -->
+        <aside class="static-sidebar">
+          <div id="devis" class="form-card">
+            <h2>Estimez vos Aides Gratuites</h2>
+            <p class="subtitle">Réponse sous 48 heures de nos artisans IRVE</p>
+            <StepsForm />
+          </div>
+
+          <div class="sidebar-widget bg-purple-gradient">
+            <h3>📑 Crédit d'Impôt 500 €</h3>
+            <p>Le crédit d'impôt national 2026 finance la pose de votre wallbox intelligente à domicile (résidences principales et secondaires) sans conditions de revenus.</p>
+            <a href="/aides-advenir/" style="color: var(--secondary); font-weight: bold; font-size: 13.5px;">Consulter les aides &rarr;</a>
+          </div>
+
+          <div class="sidebar-widget">
+            <h3>🔌 Qualification Obligatoire</h3>
+            <p style="font-size: 13px;">Depuis le décret du 12 janvier 2017, faire poser sa borne par un électricien qualifié IRVE est requis pour prétendre aux subventions et garantir votre assurance habitation.</p>
+            <a href="/guide-installation/" style="color: var(--secondary); font-weight: bold; font-size: 13px;">Consulter le guide technique &rarr;</a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  /* Styles specific to rendered markdown tags to ensure they fit standard typography */
+  .markdown-body-render h2 {
+    font-size: 24px;
+    color: var(--primary);
+    margin: 35px 0 15px;
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: 6px;
+  }
+  .markdown-body-render h3 {
+    font-size: 18.5px;
+    color: var(--primary);
+    margin: 24px 0 10px;
+  }
+  .markdown-body-render p {
+    font-size: 15.5px;
+    line-height: 1.65;
+    margin-bottom: 18px;
+    color: var(--text);
+  }
+  .markdown-body-render ul, .markdown-body-render ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 15px;
+  }
+  .markdown-body-render table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 14px;
+  }
+  .markdown-body-render th, .markdown-body-render td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .markdown-body-render th {
+    background-color: var(--primary-light);
+    color: var(--primary);
+    font-weight: bold;
+    text-align: left;
+  }
+  .markdown-body-render blockquote {
+    border-left: 4px solid var(--accent);
+    background: var(--primary-light);
+    padding: 15px 20px;
+    margin: 25px 0;
+    border-radius: var(--radius-sm);
+    color: var(--primary);
+    font-style: italic;
+  }
+  @media (max-width: 992px) {
+    .two-column-layout {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

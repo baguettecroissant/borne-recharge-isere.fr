@@ -1,0 +1,26 @@
+{
+  "name": "Borne Recharge Isère",
+  "short_name": "Borne 38",
+  "description": "Installation de borne de recharge (Wallbox) et de prise renforcée en Isère (38). Électriciens qualifiés IRVE. Devis Gratuits.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F0F4FF",
+  "theme_color": "#1E40AF",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

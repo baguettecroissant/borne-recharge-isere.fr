@@ -1,0 +1,162 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import config from '../data/config.json';
+import communes from '../data/communes.json';
+
+const mountainCommunes = [...communes].filter(c => (c.altitude || 0) > 600).slice(0, 12);
+
+const title = `Recharger son VE en Montagne : Autonomie, Froid & Altitude en Isère`;
+const description = `Découvrez l'impact de l'altitude et des températures alpines négatives sur votre batterie de voiture électrique, et les solutions de wallbox adaptées au gel.`;
+
+const breadcrumbItems = [
+  { label: "Accueil", href: "/" },
+  { label: "Recharge en Montagne" }
+];
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup 
+    slot="head" 
+    pageUrl={Astro.url.href}
+    pageTitle={title}
+    pageDescription={description}
+    breadcrumbItems={breadcrumbItems}
+  />
+
+  <Breadcrumb items={breadcrumbItems} />
+
+  <section class="static-page-section" style="padding: 50px 0 80px; background-color: var(--bg);">
+    <div class="container">
+      <div class="two-column-layout">
+        
+        <!-- Main Content -->
+        <div class="static-main-content rich-text" style="background: var(--card-bg); padding: 40px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+          <h1 style="font-family: var(--font-heading); font-size: 32px; font-weight: 700; color: var(--primary); margin-bottom: 20px;">Recharger sa Voiture Électrique en Montagne en Isère (38)</h1>
+          
+          <div style="margin-bottom: 30px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);">
+            <img src="/images/guide-montagne.png" alt="Voiture électrique recharge en montagne sous la neige" style="width: 100%; height: auto; max-height: 400px; object-fit: cover; display: block;" />
+          </div>
+          
+          <p>
+            Conduire et recharger un véhicule électrique dans les massifs de l'Isère (l'Oisans, Belledonne, le Vercors ou la Chartreuse) requiert une attention particulière. Les températures hivernales extrêmes et les importants dénivelés influencent le comportement de la batterie. Voici nos conseils d'experts pour adapter votre infrastructure de recharge résidentielle aux rigueurs de l'altitude alpine.
+          </p>
+
+          <blockquote style="border-left: 4px solid var(--accent); background: var(--primary-light); padding: 15px 20px; margin: 25px 0; border-radius: var(--radius-sm); color: var(--primary);">
+            <strong>🏔️ Spécificité alpine :</strong> À partir de 800 mètres d'altitude, le gel nocturne prolongé et la neige lourde nécessitent l'installation d'une borne certifiée grand froid de catégorie <strong>IP65 / IK10</strong> pour garantir la sécurité et l'opérabilité de la recharge.
+          </blockquote>
+
+          <h2>1. Comment le froid impacte-t-il votre batterie ?</h2>
+          <p>
+            Le froid modifie la viscosité de l'électrolyte à l'intérieur des cellules de la batterie lithium-ion, ce qui ralentit les transferts d'énergie. Deux impacts majeurs se font sentir :
+          </p>
+          <ul style="margin-left: 20px; margin-bottom: 25px; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>Baisse d'autonomie temporaire :</strong> Les basses températures réduisent la capacité disponible de 20% à 30%. L'usage du chauffage de l'habitacle augmente également la consommation.</li>
+            <li><strong>Recharge plus lente :</strong> Pour protéger les cellules froides, le système de gestion de la batterie (BMS) limite la puissance de recharge acceptée.</li>
+          </ul>
+
+          <h2>2. Le Pré-conditionnement thermique : La clé de l'autonomie</h2>
+          <p>
+            Pour limiter la perte d'autonomie, la meilleure solution consiste à programmer le <strong>pré-conditionnement thermique</strong> de la batterie depuis l'application de votre voiture pendant qu'elle est encore branchée sur votre wallbox.
+          </p>
+          <p>
+            En tirant l'énergie de préchauffage directement de votre réseau électrique de maison (plutôt que de la batterie), vous démarrez votre trajet en montagne avec une batterie chaude et performante à 100%. Cela exige une wallbox de <strong>7.4 kW ou 11 kW</strong> pour délivrer une puissance suffisante.
+          </p>
+
+          <h2>3. Choisir le bon équipement pour un chalet de montagne</h2>
+          <p>
+            L'installation de bornes dans les communes d'altitude d'Isère (comme l'Alpe d'Huez, Chamrousse ou les Sept Laux) doit respecter les contraintes du climat :
+          </p>
+          <div class="table-scroll-wrapper" style="overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%;">
+            <table class="data-table" style="min-width: 500px; width: 100%; border-collapse: collapse; margin: 25px 0;">
+              <thead>
+                <tr>
+                  <th>Spécification technique</th>
+                  <th>Niveau minimum requis</th>
+                  <th>Raison technique en montagne</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Température d'utilisation</strong></td>
+                  <td>Jusqu'à -25°C / -30°C</td>
+                  <td>Éviter le gel des circuits électroniques internes.</td>
+                </tr>
+                <tr>
+                  <td><strong>Indice de protection (IP)</strong></td>
+                  <td>IP65 (Totalement étanche)</td>
+                  <td>Résister aux tempêtes de neige et à l'humidité.</td>
+                </tr>
+                <tr>
+                  <td><strong>Résistance aux impacts (IK)</strong></td>
+                  <td>IK10 (Haute résistance)</td>
+                  <td>Protéger la borne des chocs d'outils de déblaiement.</td>
+                </tr>
+                <tr>
+                  <td><strong>Câble d'alimentation</strong></td>
+                  <td>Section renforcée de type silicone</td>
+                  <td>Conserver la souplesse du câble par grand froid.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2>4. Régénération en descente : Récupérer de l'énergie gratuite</h2>
+          <p>
+            Si monter un col consomme beaucoup d'énergie, descendre permet de transformer l'énergie potentielle de pesanteur en électricité. Grâce au freinage régénératif, une descente de col de 15 km vers la vallée de l'Isère permet de réinjecter **jusqu'à 8 kWh** dans votre batterie sans toucher à la pédale de frein, augmentant instantanément votre autonomie globale.
+          </p>
+
+          <div style="background: var(--primary-light); border: 1.5px solid var(--border-color); padding: 25px; border-radius: var(--radius-md); margin-top: 40px;">
+            <h3 style="margin-top: 0; color: var(--primary); font-size: 17px; font-weight: 600; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-bottom: 15px;">🔗 Articles connexes utiles</h3>
+            <ul style="list-style: none; padding-left: 0; display: flex; flex-direction: column; gap: 12px; font-size: 14px; margin-bottom: 0;">
+              <li>❄️ <a href="/guides/comparatif-wallbox-resistantes-froid-ip65/" style="color: var(--secondary); font-weight: 600;">Comparateur de Wallbox résistantes au froid</a></li>
+              <li>🏡 <a href="/guides/borne-recharge-chalet-montagne-protection-gel-solaire/" style="color: var(--secondary); font-weight: 600;">Installation en chalet de montagne et solaire</a></li>
+              <li>🧮 <a href="/tarifs/" style="color: var(--secondary); font-weight: 600;">Barème de tarifs détaillés 2026 en Isère</a></li>
+            </ul>
+          </div>
+
+          <!-- Mini-annuaire communes montagne — maillage interne -->
+          <div style="border-top: 1px solid var(--border-color); padding-top: 35px; margin-top: 40px;">
+            <h2 style="font-size: 20px; color: var(--primary); margin-bottom: 5px;">📍 Raccordement IRVE dans les massifs de l'Isère</h2>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">Nos installateurs interviennent dans l'ensemble des communes d'altitude du 38 :</p>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+              {mountainCommunes.map((c) => (
+                <a href={`/installateur-borne-recharge-${c.slug}/`} style="font-size: 12.5px; color: var(--secondary); font-weight: 600; background: var(--primary-light); padding: 8px 12px; border-radius: 4px; border: 1px solid var(--border-color); text-decoration: none; text-align: center; transition: var(--transition);">
+                  {c.nom} ({c.altitude}m)
+                </a>
+              ))}
+            </div>
+            <p style="text-align: center; margin-top: 12px;">
+              <a href="/communes/" style="font-size: 13px; color: var(--accent); font-weight: 600;">Voir toutes les communes →</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="static-sidebar">
+          <div class="sidebar-widget bg-purple-gradient">
+            <h3>🧮 Obtenez 3 Devis IRVE</h3>
+            <p>Faites installer une borne adaptée au relief et au gel par l'un des électriciens de notre réseau qualifié IRVE.</p>
+            <a href="/devis/" class="sidebar-cta-gold">Demander mes devis gratuits →</a>
+          </div>
+
+          <div class="sidebar-widget">
+            <h3>🛡️ Protection Obligatoire</h3>
+            <p style="font-size: 13px;">Toutes les poses réalisées par nos partenaires intègrent des parafoudres obligatoires pour protéger votre wallbox contre la foudre, fréquente sur les sommets alpins.</p>
+            <a href="/guide-installation/" style="color: var(--secondary); font-weight: 600; font-size: 13px;">Consulter le guide technique →</a>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @media (max-width: 992px) {
+    .two-column-layout {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

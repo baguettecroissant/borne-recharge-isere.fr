@@ -1,0 +1,268 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+import config from '../data/config.json';
+import communes from '../data/communes.json';
+
+const title = `${config.brandName} | Installateur Borne de Recharge IRVE Isère (38)`;
+const description = config.description;
+
+// Selection of popular communes for home directory listing
+const popularCommunes = communes.slice(0, 24);
+---
+
+<Layout title={title} description={description}>
+  <SchemaMarkup
+    slot="head"
+    pageUrl={Astro.url.href}
+    pageTitle={title}
+    pageDescription={description}
+  />
+
+  <!-- Hero Section with background illustration and multi-step form -->
+  <Hero />
+
+  <!-- Department & Local Stats Bar -->
+  <section class="local-stats-bar" style="background-color: var(--primary-light); border-bottom: 1px solid var(--border-color); padding: 24px 0;">
+    <div class="container stats-inner" style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 20px;">
+      <div class="stat-item" style="text-align: center; display: flex; flex-direction: column; gap: 4px;">
+        <span class="stat-number" style="font-family: var(--font-heading); font-weight: 700; font-size: 28px; color: var(--accent); line-height: 1;">155 Villes</span>
+        <span class="stat-label" style="font-size: 13.5px; font-weight: 600; color: var(--primary);">Desservies dans le 38</span>
+      </div>
+      <div class="stat-item" style="text-align: center; display: flex; flex-direction: column; gap: 4px;">
+        <span class="stat-number" style="font-family: var(--font-heading); font-weight: 700; font-size: 28px; color: var(--accent); line-height: 1;">IRVE</span>
+        <span class="stat-label" style="font-size: 13.5px; font-weight: 600; color: var(--primary);">Certification Obligatoire</span>
+      </div>
+      <div class="stat-item" style="text-align: center; display: flex; flex-direction: column; gap: 4px;">
+        <span class="stat-number" style="font-family: var(--font-heading); font-weight: 700; font-size: 28px; color: var(--accent); line-height: 1;">500 €</span>
+        <span class="stat-label" style="font-size: 13.5px; font-weight: 600; color: var(--primary);">Crédit d'Impôt National</span>
+      </div>
+      <div class="stat-item" style="text-align: center; display: flex; flex-direction: column; gap: 4px;">
+        <span class="stat-number" style="font-family: var(--font-heading); font-weight: 700; font-size: 28px; color: var(--accent); line-height: 1;">-80%</span>
+        <span class="stat-label" style="font-size: 13.5px; font-weight: 600; color: var(--primary);">Coût de charge vs Essence</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educational Section -->
+  <section class="educational-section" style="padding: 70px 0; background-color: var(--card-bg);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h2 style="font-size: 32px; color: var(--primary);">Recharge Électrique à domicile en Isère (38)</h2>
+        <p style="color: var(--text-muted); font-size: 16px; margin-top: 10px;">Pourquoi équiper votre maison, chalet de montagne ou copropriété d'une Wallbox dédiée ?</p>
+      </div>
+
+      <div class="educational-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+        <div class="edu-card" style="background: var(--bg); border: 1px solid var(--border-color); padding: 30px 24px; border-radius: var(--radius-md); transition: var(--transition);">
+          <div style="font-size: 32px; margin-bottom: 12px;">🏔️</div>
+          <h3 style="font-size: 18px; margin-bottom: 8px;">Maisons, Chalets &amp; Climat Alpin</h3>
+          <p style="font-size: 14.5px; color: var(--text-muted); line-height: 1.5;">L'Isère alterne entre plaines résidentielles (Bourgoin-Jallieu, Vienne) et massifs d'altitude (Vercors, Belledonne, Oisans). Face au gel hivernal qui réduit temporairement l'autonomie des batteries de 20% à 30%, une wallbox rapide et protégée assure le préchauffage optimal de votre véhicule à domicile.</p>
+        </div>
+        <div class="edu-card" style="background: var(--bg); border: 1px solid var(--border-color); padding: 30px 24px; border-radius: var(--radius-md); transition: var(--transition);">
+          <div style="font-size: 32px; margin-bottom: 12px;">🛡️</div>
+          <h3 style="font-size: 18px; margin-bottom: 8px;">Sécurité Électrique IRVE</h3>
+          <p style="font-size: 14.5px; color: var(--text-muted); line-height: 1.5;">Recharger sur une prise standard comporte des risques de surchauffe électrique importants, surtout avec des puissances d'appel élevées. La Wallbox dispose de disjoncteurs et d'interrupteurs différentiels de type A-EV contre les surtensions, conformes aux exigences NF C 15-100.</p>
+        </div>
+        <div class="edu-card" style="background: var(--bg); border: 1px solid var(--border-color); padding: 30px 24px; border-radius: var(--radius-md); transition: var(--transition);">
+          <div style="font-size: 32px; margin-bottom: 12px;">⚡</div>
+          <h3 style="font-size: 18px; margin-bottom: 8px;">Hydroélectricité &amp; Smart Charging</h3>
+          <p style="font-size: 14.5px; color: var(--text-muted); line-height: 1.5;">L'Isère produit une part majeure de son électricité via ses barrages hydroélectriques. En programmant vos heures de charge de nuit avec le délestage dynamique, vous rechargez votre véhicule avec l'énergie la plus propre de France sans surcharger votre compteur.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparative Pricing Grid -->
+  <section class="pricing-summary" style="padding: 70px 0; background-color: var(--bg); border-top: 1px solid var(--border-color);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h2 style="font-size: 32px; color: var(--primary);">Quel budget pour votre Borne de Recharge en 2026 ?</h2>
+        <p style="color: var(--text-muted); font-size: 16px; margin-top: 10px;">Tarifs moyens posés TTC observés dans le département de l'Isère (avant déduction d'aides)</p>
+      </div>
+
+      <div class="pricing-grid-home" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch;">
+        <!-- Green'up Card -->
+        <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 35px 25px; position: relative; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: var(--transition);">
+          <h3 style="font-size: 19px; margin-bottom: 10px;">Prise Renforcée Green'Up</h3>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; min-height: 40px;">La solution économique pour les recharges résidentielles lentes de nuit (hybrides ou trajets quotidiens courts).</p>
+          <div style="font-family: var(--font-heading); font-size: 24px; font-weight: 700; color: var(--accent); margin-bottom: 20px; border-bottom: 2px solid var(--primary-light); padding-bottom: 15px;">400 € – 700 € <span style="display: block; font-size: 11px; color: var(--text-muted); font-family: var(--font-body); font-weight: normal; margin-top: 2px;">TTC posé (Standard)</span></div>
+          <ul style="list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1;">
+            <li style="font-size: 13.5px; display: flex; align-items: center; gap: 8px;"><span style="color: var(--accent); font-weight: bold;">✓</span> Recharge sécurisée à 3.7 kW (16A)</li>
+            <li style="font-size: 13.5px; display: flex; align-items: center; gap: 8px;"><span style="color: var(--accent); font-weight: bold;">✓</span> Convient aux hybrides rechargeables</li>
+            <li style="font-size: 13.5px; display: flex; align-items: center; gap: 8px;"><span style="color: var(--accent); font-weight: bold;">✓</span> Pose simple et rapide par électricien</li>
+            <li style="font-size: 13.5px; display: flex; align-items: center; gap: 8px;"><span style="color: var(--accent); font-weight: bold;">✓</span> TVA réduite à 5,5%</li>
+          </ul>
+          <a href="/tarifs/" style="background: var(--primary-light); color: var(--primary); border: 1px solid var(--border-color); padding: 10px; border-radius: var(--radius-sm); text-align: center; font-weight: 600; font-size: 13.5px; transition: var(--transition);">En savoir plus &rarr;</a>
+        </div>
+
+        <!-- Wallbox 7.4kW -->
+        <div style="background: var(--card-bg); border: 1.5px solid var(--accent); border-radius: var(--radius-md); padding: 35px 25px; position: relative; display: flex; flex-direction: column; box-shadow: var(--shadow-md); transition: var(--transition);">
+          <div style="position: absolute; top: 15px; right: 15px; background: var(--accent); color: white; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase;">Recommandé</div>
+          <h3 style="font-size: 19px; margin-bottom: 10px;">Wallbox 7 kW Monophasé</h3>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; min-height: 40px;">Le standard du pavillon individuel : recharge complète en une nuit (6 à 8 heures).</p>
+          <div style="font-family: var(--font-heading); font-size: 24px; font-weight: 700; color: var(--accent); margin-bottom: 20px; border-bottom: 2px solid var(--primary-light); padding-bottom: 15px;">1 200 € – 1 800 € <span style="display: block; font-size: 11px; color: var(--text-muted); font-family: var(--font-body); font-weight: normal; margin-top: 2px;">TTC posé (Crédit d'impôt déductible)</span></div>
+          <ul style="list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1;">
+            <li style="font-size: 13.5px; display: flex; align-items: center; gap: 8px;"><span style="color: var(--accent); font-weight: bold;">✓</span> Recharge rapide à 7.4 kW (32A)</li>
+            <li style="font-size: 13.5px; display: flex; align-items: center; gap: 8px;"><span style="color: var(--accent); font-weight: bold;">✓</span> Compatible délestage dynamique Linky</li>
+            <li style="font-size: 13.5px; display: flex; align-items: center; gap: 8px;"><span style="color: var(--accent); font-weight: bold;">✓</span> Éligible au crédit d'impôt de 500 €</li>
+            <li style="font-size: 13.5px; display: flex; align-items: center; gap: 8px;"><span style="color: var(--accent); font-weight: bold;">✓</span> Câble Type 2 inclus pour recharges rapides</li>
+          </ul>
+          <a href="/tarifs/" style="background: var(--accent); color: white; padding: 10px; border-radius: var(--radius-sm); text-align: center; font-weight: 600; font-size: 13.5px; transition: var(--transition);">En savoir plus &rarr;</a>
+        </div>
+
+        <!-- Wallbox 11/22kW -->
+        <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 35px 25px; position: relative; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: var(--transition);">
+          <h3 style="font-size: 19px; margin-bottom: 10px;">Wallbox 11 / 22 kW Triphasé</h3>
+          <p style="font-size: 13.5px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; min-height: 40px;">Recharge ultra-rapide en 1 à 3 heures (idéal pour grandes propriétés ou triphasé).</p>
+          <div style="font-family: var(--font-heading); font-size: 24px; font-weight: 700; color: var(--accent); margin-bottom: 20px; border-bottom: 2px solid var(--primary-light); padding-bottom: 15px;">1 500 € – 3 600 € <span style="display: block; font-size: 11px; color: var(--text-muted); font-family: var(--font-body); font-weight: normal; margin-top: 2px;">TTC posé (Chantier Montagne &amp; Triphasé)</span></div>
+          <ul style="list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1;">
+            <li style="font-size: 13.5px; display: flex; align-items: center; gap: 8px;"><span style="color: var(--accent); font-weight: bold;">✓</span> Recharge rapide à 11 kW ou 22 kW</li>
+            <li style="font-size: 13.5px; display: flex; align-items: center; gap: 8px;"><span style="color: var(--accent); font-weight: bold;">✓</span> Idéal Tesla, Porsche, Mercedes, Audi, BMW</li>
+            <li style="font-size: 13.5px; display: flex; align-items: center; gap: 8px;"><span style="color: var(--accent); font-weight: bold;">✓</span> Passage en triphasé géré de bout en bout</li>
+            <li style="font-size: 13.5px; display: flex; align-items: center; gap: 8px;"><span style="color: var(--accent); font-weight: bold;">✓</span> Protection étanche extérieure IP65</li>
+          </ul>
+          <a href="/tarifs/" style="background: var(--primary-light); color: var(--primary); border: 1px solid var(--border-color); padding: 10px; border-radius: var(--radius-sm); text-align: center; font-weight: 600; font-size: 13.5px; transition: var(--transition);">En savoir plus &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guides & Conseils Sections -->
+  <section class="guides-section" style="padding: 70px 0; background-color: var(--card-bg); border-top: 1px solid var(--border-color);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h2 style="font-size: 32px; color: var(--primary);">📚 Guides &amp; Conseils d'Experts</h2>
+        <p style="color: var(--text-muted); font-size: 16px; margin-top: 10px;">Tout savoir sur la recharge de véhicule électrique en Isère avant de vous lancer</p>
+      </div>
+
+      <div class="guides-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        <a href="/guide-installation/" style="background: var(--bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; transition: var(--transition); text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 28px;">🛠️</span>
+          <h3 style="font-size: 16px; color: var(--primary); margin: 0;">Guide Technique Installation</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.45;">Câblage, normes NF C 15-100, protections IRVE et étapes du chantier</p>
+        </a>
+        <a href="/aides-advenir/" style="background: var(--bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; transition: var(--transition); text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 28px;">💰</span>
+          <h3 style="font-size: 16px; color: var(--primary); margin: 0;">Aides ADVENIR &amp; Subventions</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.45;">Crédit d'impôt 500 €, prime ADVENIR copropriété, TVA 5,5%</p>
+        </a>
+        <a href="/guides/prix-borne-recharge-isere-2026/" style="background: var(--bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; transition: var(--transition); text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 28px;">🔌</span>
+          <h3 style="font-size: 16px; color: var(--primary); margin: 0;">Tarifs complets 38 en 2026</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.45;">Analyse complète des prix et subventions dans le 38</p>
+        </a>
+        <a href="/guides/copropriete-grenoble-irve-collective-syndic/" style="background: var(--bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; transition: var(--transition); text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 28px;">🏢</span>
+          <h3 style="font-size: 16px; color: var(--primary); margin: 0;">Borne en Copropriété Grenoble</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.45;">Droit à la prise, démarches syndic et raccordement collectif en Isère</p>
+        </a>
+        <a href="/guides/recharger-ve-montagne-froid-altitude-iseroise/" style="background: var(--bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; transition: var(--transition); text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 28px;">🏔️</span>
+          <h3 style="font-size: 16px; color: var(--primary); margin: 0;">Recharge en Altitude &amp; Froid</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.45;">Gérer l'impact du gel hivernal et optimiser la régénération en descente</p>
+        </a>
+        <a href="/guides/wallbox-hydroelectricite-isere-recharge-verte/" style="background: var(--bg); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; transition: var(--transition); text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 28px;">💧</span>
+          <h3 style="font-size: 16px; color: var(--primary); margin: 0;">Houille Blanche &amp; Énergie Verte</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.45;">Coupler sa borne avec l'hydroélectricité locale et l'énergie solaire</p>
+        </a>
+      </div>
+
+      <div style="text-align: center; margin-top: 30px;">
+        <a href="/guides/" style="display: inline-block; background: var(--primary-light); color: var(--primary); border: 1.5px solid var(--border-color); padding: 12px 28px; border-radius: 50px; font-family: var(--font-heading); font-weight: 600; font-size: 15px; transition: var(--transition);">📚 Voir tous nos guides →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popular Communes Directory -->
+  <section class="popular-cities" style="padding: 70px 0; background-color: var(--card-bg); border-top: 1px solid var(--border-color);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h2 style="font-size: 32px; color: var(--primary);">Trouver un installateur IRVE dans votre commune (38)</h2>
+        <p style="color: var(--text-muted); font-size: 16px; margin-top: 10px;">Accédez aux aides locales d'Isère et comparez 3 devis d'électriciens qualifiés</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; margin-top: 30px;">
+        {popularCommunes.map((c) => (
+          <div style="background: var(--bg); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 18px 20px; transition: var(--transition);">
+            <a href={`/installateur-borne-recharge-${c.slug}/`} style="font-weight: 700; font-size: 15px; display: flex; justify-content: space-between; align-items: center; color: var(--primary); margin-bottom: 10px;">
+              <span>{c.nom} <span style="font-size: 11px; font-weight: normal; color: var(--text-muted);">({c.codePostal})</span></span>
+              <span style="color: var(--accent);">&rarr;</span>
+            </a>
+            <div style="display: flex; gap: 8px; font-size: 11.5px;">
+              <a href={`/borne-recharge-copropriete-${c.slug}/`} style="color: var(--text-muted); border: 1px solid var(--border-color); padding: 3px 8px; border-radius: 4px; transition: var(--transition);" title={`Copropriété ${c.nom}`}>🏢 Copropriété</a>
+              <a href={`/wallbox-${c.slug}/`} style="color: var(--text-muted); border: 1px solid var(--border-color); padding: 3px 8px; border-radius: 4px; transition: var(--transition);" title={`Wallbox ${c.nom}`}>⚡ Wallbox</a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="/communes/" style="display: inline-block; background: var(--primary-light); color: var(--primary); border: 1.5px solid var(--border-color); padding: 12px 28px; border-radius: 50px; font-family: var(--font-heading); font-weight: 600; font-size: 15px; transition: var(--transition);">📍 Voir toutes les communes de l'Isère (38)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section class="faq-section" style="padding: 70px 0; background-color: var(--bg); border-top: 1px solid var(--border-color);">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h2 style="font-size: 32px; color: var(--primary);">Foire Aux Questions (FAQ)</h2>
+        <p style="color: var(--text-muted); font-size: 16px; margin-top: 10px;">Tout comprendre sur l'installation d'une borne de recharge en Isère</p>
+      </div>
+
+      <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px;">
+        <details class="faq-details">
+          <summary>
+            Pourquoi la qualification IRVE est-elle obligatoire ?
+          </summary>
+          <div class="faq-answer">
+            <p>Depuis le décret du 12 janvier 2017, tout point de recharge d'une puissance supérieure à 3.7 kW doit impérativement être installé par un électricien ayant suivi une formation spécifique et titulaire d'une qualification IRVE (Infrastructures de Recharge pour Véhicules Électriques) agréée. En l'absence de cette qualification, votre assurance habitation refusera toute indemnisation en cas de sinistre d'origine électrique, et les constructeurs automobiles rejetteront la garantie de la batterie du véhicule.</p>
+          </div>
+        </details>
+
+        <details class="faq-details">
+          <summary>
+            Quelles sont les aides à l'installation d'une borne en copropriété à Grenoble ou Voiron ?
+          </summary>
+          <div class="faq-answer">
+            <p>En copropriété en Isère (38), vous disposez du \"droit à la prise\" (décret de 2020) pour équiper votre place de parking à vos frais. Vous êtes alors éligible à :</p>
+            <ul style="margin-left: 20px; margin-top: 8px; display: flex; flex-direction: column; gap: 4px;">
+              <li>La prime ADVENIR, couvrant 50% du montant des travaux avec un plafond de 960 € TTC par point de charge.</li>
+              <li>La TVA super-réduite à 5,5% sur le matériel et la main-d'œuvre.</li>
+              <li>Un crédit d'impôt national de 500 € pour les résidents.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="faq-details">
+          <summary>
+            Quel est l'impact du froid sur l'autonomie et la recharge de ma voiture électrique ?
+          </summary>
+          <div class="faq-answer">
+            <p>Le froid hivernal ralentit les réactions chimiques internes de la batterie, ce qui peut réduire son autonomie de 20% à 30% et brider la vitesse de recharge au démarrage. Disposer d'une wallbox à domicile en Isère permet de lancer un préconditionnement de l'habitacle et de la batterie pendant que le véhicule est encore branché au réseau, préservant ainsi l'énergie utile pour le trajet.</p>
+          </div>
+        </details>
+
+        <details class="faq-details">
+          <summary>
+            Comment se passe la demande de devis sur votre site ?
+          </summary>
+          <div class="faq-answer">
+            <p>Notre formulaire qualifie votre demande (type de recharge, logement, installation monophasée ou triphasée). Les informations sont validées et transmises en temps réel à nos installateurs partenaires qualifiés IRVE proches de votre commune en Isère (38). Vous recevez sous 48 heures jusqu'à 3 offres détaillées gratuites et sans engagement. Une visite technique sur site est effectuée avant de finaliser les travaux.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @media (max-width: 992px) {
+    .pricing-grid-home, .educational-grid, .guides-grid {
+      grid-template-columns: 1fr !important;
+      gap: 20px;
+    }
+  }
+</style>
