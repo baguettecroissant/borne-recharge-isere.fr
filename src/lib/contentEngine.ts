@@ -118,14 +118,17 @@ export function getLocalAgency(codePostal: string, slug: string): { name: string
 }
 
 export function getVariantIndex(slug: string, offset: number, maxVariants: number): number {
-  let hash = offset * 31;
+  // FNV-1a inspired hash with proper offset mixing
+  let hash = 2166136261; // FNV offset basis
+  hash = Math.imul(hash ^ offset, 16777619);
+  hash = Math.imul(hash ^ (offset >>> 16), 2654435761);
   for (let i = 0; i < slug.length; i++) {
-    hash = ((hash << 5) - hash + slug.charCodeAt(i)) | 0;
+    hash = Math.imul(hash ^ slug.charCodeAt(i), 16777619);
   }
-  hash = hash ^ (slug.length * 2654435761);
-  hash = (hash ^ (offset * 16777619)) | 0;
-  hash = (hash + slug.charCodeAt(0) * 7919 + slug.charCodeAt(slug.length - 1) * 104729) | 0;
-  return Math.abs(hash) % maxVariants;
+  hash ^= hash >>> 16;
+  hash = Math.imul(hash, 2246822507);
+  hash ^= hash >>> 13;
+  return (hash >>> 0) % maxVariants;
 }
 
 export function getDynamicPrices(commune: Commune) {
