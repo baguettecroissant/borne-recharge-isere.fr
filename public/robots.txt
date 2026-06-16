@@ -1,22 +1,5 @@
-# robots.txt — borne-recharge-isere.fr
-# Optimized for maximum indexation of local pages
-
 User-agent: *
 Allow: /
-
-# Block non-indexable utility pages
 Disallow: /confirmation/
-Disallow: /api/
 
-# Block build artifacts
-Disallow: /_astro/
-
-# Sitemaps
 Sitemap: https://borne-recharge-isere.fr/sitemap-index.xml
-
-# Crawl budget optimization
-User-agent: Googlebot
-Crawl-delay: 0
-
-User-agent: Bingbot
-Crawl-delay: 1
